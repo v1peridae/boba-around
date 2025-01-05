@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 
-const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
 function App() {
   const [address, setAddress] = useState("");
   const [bobaCafe, setBobaCafe] = useState("");
@@ -11,6 +9,7 @@ function App() {
   const [markers, setMarkers] = useState([]);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [AdvancedMarkerElement, setAdvancedMarkerElement] = useState(null);
 
   useEffect(() => {
     const initMap = () => {
@@ -23,7 +22,20 @@ function App() {
     initMap();
   }, []);
 
+  useEffect(() => {
+    const loadMarkerLibrary = async () => {
+      try {
+        const { AdvancedMarkerElement: MarkerElement } = await google.maps.importLibrary("marker");
+        setAdvancedMarkerElement(() => MarkerElement);
+      } catch (error) {
+        console.error("Error loading marker library:", error);
+      }
+    };
+    loadMarkerLibrary();
+  }, []);
+
   const handleSearch = async () => {
+    if (!AdvancedMarkerElement) return;
     console.log("Current address state:", address);
     
     if (!address || !address.trim()) {
