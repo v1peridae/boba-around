@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Boba Cups";
+  src: url("./assets/fonts/BobaCups-owezo.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Boba Milky";
+  src: url("./assets/fonts/BobaMily-RpRev.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
