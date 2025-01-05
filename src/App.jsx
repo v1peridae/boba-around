@@ -61,7 +61,7 @@ function App() {
             location: location,
             radius: 16093,
             keyword: 'boba',
-            type: 'cafe', 
+            type: 'food', 
           };
 
           service.nearbySearch(request, (results, status) => {
