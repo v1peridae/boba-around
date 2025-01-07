@@ -14,9 +14,12 @@ function App() {
   useEffect(() => {
     const initMap = () => {
       googleMapRef.current = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 37.7749, lng: -122.4194 },
+        center: { lat: 40.7128, lng: -74.0060 },
         zoom: 12,
         mapId: '67ee8a2828f6dd00',
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
       });
     };
     initMap();
@@ -118,17 +121,17 @@ function App() {
   };
 
   return (
-    <div className="bg-[#E59292] h-screen flex flex-col justify-center items-center">
-      <h1 className="font-boba-cups text-[#4B3737] text-7xl mt-7">
+    <div className="bg-[#E59292] min-h-screen flex flex-col justify-center items-center p-4">
+      <h1 className="font-boba-cups text-[#4B3737] text-4xl md:text-7xl mt-7 text-center">
         &lt; Boba Around &gt;
       </h1>
-      <p className="font-boba-milky text-[#5A4646] text-2xl mt-5">
+      <p className="font-boba-milky text-[#5A4646] text-lg md:text-2xl mt-5 text-center px-2">
         Travelling to a new city and you dont know where to get boba?
       </p>
-      <h2 className="font-boba-cups text-[#4B3737] text-4xl mt-5">
+      <h2 className="font-boba-cups text-[#4B3737] text-2xl md:text-4xl mt-5 text-center px-2">
         Enter A Location To Find A Boba Cafe There
       </h2>
-      <div className="relative w-1/2 mt-5">
+      <div className="relative w-full md:w-1/2 mt-5 px-4">
         <input 
           ref={inputRef}
           type="text" 
@@ -140,36 +143,36 @@ function App() {
               handleSearch();
             }
           }}
-          className="w-full p-4 rounded-full bg-[#8D5F5F] text-[#4B3737] font-boba-milky text-2xl placeholder:text-[#4B3737]/50 outline-none text-left pr-36 pl-10" 
+          className="w-full p-3 md:p-4 rounded-full bg-[#8D5F5F] text-[#4B3737] font-boba-milky text-xl md:text-2xl placeholder:text-[#4B3737]/50 outline-none text-left pr-24 md:pr-36 pl-4 md:pl-10" 
         />
         <button 
           onClick={handleSearch} 
-          className="text-2xl absolute right-[10px] top-1/2 -translate-y-1/2 px-7 py-2 bg-[#4B3737] text-[#8D5F5F] rounded-full font-boba-milky hover:bg-[#4B3737]/80 transition-all duration-300"
+          className="text-xl md:text-2xl absolute right-[24px] top-1/2 -translate-y-1/2 px-4 md:px-7 py-1 md:py-2 bg-[#4B3737] text-[#8D5F5F] rounded-full font-boba-milky hover:bg-[#4B3737]/80 transition-all duration-300"
         >
           Boba?
         </button>
       </div>
-      <div className="w-5/6 h-[400px] mt-10 flex gap-4">
-        <div className={`outline-none rounded-3xl overflow-hidden shadow-lg border transition-all duration-300 ${isInfoOpen ? 'w-2/3' : 'w-full'}`}>
+      <div className="w-full md:w-5/6 h-[540px] md:h-[400px] mt-6 md:mt-10 flex flex-col md:flex-row gap-4">
+        <div className={`outline-none rounded-3xl overflow-hidden shadow-lg border transition-all duration-300 ${isInfoOpen ? 'h-[250px] md:h-auto md:w-2/3' : 'h-full md:w-full'}`}>
           <div ref={mapRef} className="w-full h-full"></div>
         </div>
         
         {isInfoOpen && selectedCafe && (
-          <div className="w-1/4 bg-[#8D5F5F] rounded-3xl p-4 shadow-lg">
+          <div className="w-full md:w-1/4 bg-[#8D5F5F] rounded-3xl p-4 shadow-lg h-[250px] md:h-auto overflow-y-auto">
             <button 
               onClick={() => setIsInfoOpen(false)}
-              className="float-right text-[#4B3737] font-bold text-2xl hover:text-[#E59292]"
+              className="float-right text-[#4B3737] font-bold text-2xl hover:text-[#4B3737]/50"
             >
               ✕
             </button>
-            <h3 className="font-boba-cups text-[#4B3737] text-2xl mb-4">{selectedCafe.name}</h3>
+            <h3 className="font-boba-cups text-[#4B3737] text-xl md:text-2xl mb-4">{selectedCafe.name}</h3>
             <div className="font-boba-milky text-[#4B3737]">
-              <p className="text-lg"><a className="font-boba-cups text-2xl">Rating:</a> {selectedCafe.rating} ⭐ ({selectedCafe.user_ratings_total} reviews)</p>
+              <p className="text-base md:text-lg"><a className="font-boba-cups text-xl md:text-2xl">Rating:</a> {selectedCafe.rating} ⭐ ({selectedCafe.user_ratings_total} reviews)</p>
               {selectedCafe.opening_hours && (
                 <>
                   
                   <div className="mt-2 text-lg">
-                    <p className="font-boba-cups text-2xl">Today's Hours:</p>
+                    <p className="font-boba-cups text-2xl">Today&apos;s Hours:</p>
                     <div className="ml-4 text-[#4B3737]">
                       {selectedCafe.opening_hours.weekday_text?.[
                         new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
