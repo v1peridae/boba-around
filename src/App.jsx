@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div className="bg-[#E59292] min-h-screen flex flex-col justify-center items-center p-4">
-      <h1 className="font-boba-cups text-[#4B3737] text-4xl md:text-7xl mt-7 text-center">
+      <h1 className="font-boba-cups text-[#4B3737] text-[30px] md:text-7xl mt-7 text-center">
         &lt; Boba Around &gt;
       </h1>
       <p className="font-boba-milky text-[#5A4646] text-lg md:text-2xl mt-5 text-center px-2">
